@@ -4,21 +4,28 @@ let login_password = document.getElementById('login-password');
 let login_form = document.getElementById('login-form');
 let email_error = document.querySelector('#email-error');
 let password_error = document.querySelector('#password-error');
+function showLoginToast(message, type = 'error') {
+    const toast = document.querySelector('.toast');
+    const messageElement = document.getElementById('error-message');
+    messageElement.innerText = message;
+    if (type === 'error') {
+        toast.classList.add('error-toast');
+    }
+    toast.style.display = 'block';
+    setTimeout(() => {
+        toast.style.display = 'none';
+        toast.classList.remove('error-toast');
+    }, 3000);
+}
 login_form.addEventListener('submit', (e) => {
     e.preventDefault();
     let email = login_email.value;
     let password = login_password.value;
     if (!email) {
-        email_error.textContent = 'Email address is required';
-        setTimeout(() => {
-            email_error.textContent = '';
-        }, 3000);
+        showLoginToast('Email address is required');
     }
     if (!password) {
-        password_error.textContent = 'Password is required';
-        setTimeout(() => {
-            password_error.textContent = '';
-        }, 3000);
+        showLoginToast('Password is required');
     }
     if (password && email) {
         const promise2 = new Promise((res, rej) => {
@@ -34,9 +41,14 @@ login_form.addEventListener('submit', (e) => {
                 })
             }).then(res => res.json()).then(data => {
                 console.log(data);
-                localStorage.setItem('token', data.token);
-                redirect();
-                res(data);
+                if (data.error) {
+                    showLoginToast(data.error);
+                }
+                else {
+                    localStorage.setItem('token', data.token);
+                    redirect();
+                    res(data);
+                }
             }).catch(error => {
                 console.log(error);
                 rej(error);

@@ -33,7 +33,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
                 const hashedPwd = await bcrypt.hash(password, 5);
         
-                const query = `INSERT INTO users (user_id, first_name, last_name,email, password) VALUES ('${user_id}', '${first_name}', '${last_name}','${email}', '${hashedPwd}')`;
+                const query = `INSERT INTO users (user_id, first_name, last_name,email, password,role) VALUES ('${user_id}', '${first_name}', '${last_name}','${email}', '${hashedPwd}','admin')`;
         
                 mssql.connect(sqlConfig).then(pool => {
                     return pool.request().query(query);
@@ -73,54 +73,53 @@ export const registerUser = async (req: Request, res: Response) => {
 };
 
 
-export const loginRegister = async(req:Request, res: Response) =>{
+export const loginRegister = async(req:Request, res: Response) =>{  try {
+    const { email, password } = req.body;
     console.log(req.body);
-    try {
-        const {email, password} = req.body
-       
-        
 
-        const pool = await mssql.connect(sqlConfig)
+    const checkUserQuery = `SELECT * FROM users WHERE email = '${email}'`;
 
-        let user = await (await pool.request().input("email", email).input("password", password).execute('loginUser')).recordset
-        
-        if(user[0]?.email  == email){
-            const CorrectPwd = await bcrypt.compare(password, user[0]?.password)
-
-            if(!CorrectPwd){
-                return res.status(401).json({
-                    message: "Incorrect password"
-                })
-            }
-
-            const LoginCredentials = user.map(records =>{
-                const {email,password, ...rest}=records
-
-                return rest
-            })
-
-            console.log(LoginCredentials);
-
-            // dotenv.config()
-            const token = jwt.sign(LoginCredentials[0], process.env.SECRET as string, {
-                expiresIn: '3600s'
-            })
-
-            return res.status(200).json({
-                message: "Logged in successfully", token
-            })
-            
-        }else{
-            return res.json({
-                message: "Email not found"
-            })
-        }
-
-    } catch (error) {
-        return res.json({
-            error: error
+    mssql.connect(sqlConfig)
+        .then(pool => {
+            return pool.request().query(checkUserQuery);
         })
-    }
+        .then(async result => {
+            console.log("success", result);
+
+            if (result.recordset.length === 0) {
+                return res.status(401).json({ error: "User not found" });
+            } else {
+                const user = result.recordset[0];
+                const isPasswordValid = await bcrypt.compare(password, user.password);
+
+                if (!isPasswordValid) {
+                    return res.status(401).json({ error: "Invalid password" });
+                }
+
+                const token = jwt.sign(user, process.env.SECRET as string, {
+                    expiresIn: '3600s'
+                })
+
+                return res.status(200).json({
+                    message: 'User logged in successfully',token
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+
+            return res.status(500).json({
+                error: err.message || 'An error occurred while processing the login request.'
+            });
+        });
+
+} catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+        error: error.message || 'An error occurred while processing the request.'
+    });
+}
 }
 
 export const getAllUsers = async(req:Request, res:Response)=>{
