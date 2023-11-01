@@ -1,10 +1,6 @@
-let full_name = document.getElementById('full_name') as HTMLInputElement
+let first_name = document.getElementById('first_name') as HTMLInputElement
+let last_name = document.getElementById('last_name') as HTMLInputElement
 let email = document.getElementById('email') as HTMLInputElement
-let id_no = document.getElementById('id_no') as HTMLInputElement
-let phone_no = document.getElementById('phone_no') as HTMLInputElement
-let kra_pin = document.getElementById('kra_pin') as HTMLInputElement
-let nhif = document.getElementById('nhif') as HTMLInputElement
-let nssf = document.getElementById('nssf') as HTMLInputElement
 let password = document.getElementById('password') as HTMLInputElement
 let confirm_password = document.getElementById('confirm_password') as HTMLInputElement
 
@@ -13,18 +9,14 @@ let reg_form = document.getElementById('registration-form') as HTMLFormElement
 reg_form.addEventListener('submit', (event)=>{
     event.preventDefault()
 
-    let name = full_name.value
+    let Fname = first_name.value
+    let Lname = last_name.value
     let user_email = email.value
-    let ID_number = id_no.value
-    let phone = phone_no.value
-    let KRA = kra_pin.value
-    let NHIF = nhif.value
-    let NSSF = nssf.value
     let pass = password.value
     let confirm_pass = confirm_password.value
 
-    let state = name.trim() != '' && user_email.trim() != '' && ID_number.trim() != '' && phone.trim() != '' && KRA.trim() != '' && NHIF.trim() != '' && NSSF.trim() != '' && pass.trim() != '' && confirm_pass.trim() != ''
-
+    let state = Fname.trim() != '' && Lname.trim() != '' &&  user_email.trim() != '' &&  pass.trim() != '' && confirm_pass.trim() != ''
+ 
     if(state){
         if(pass == confirm_pass){
 
@@ -36,13 +28,9 @@ reg_form.addEventListener('submit', (event)=>{
                     },
                     method: "POST",
                     body: JSON.stringify({
-                        "name": name,
+                        "first_name": Fname,
+                        "last_name": Lname,
                         "email": user_email,
-                        "phone_no": phone,
-                        "id_no": ID_number,
-                        "KRA_PIN": KRA,
-                        "NHIF_NO": NHIF,
-                        "NSSF_NO": NSSF,
                         "password": pass
                     })
                 }).then((res=>res.json())).then(data=>{
