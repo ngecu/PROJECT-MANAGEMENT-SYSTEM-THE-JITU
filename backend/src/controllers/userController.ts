@@ -33,7 +33,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
                 const hashedPwd = await bcrypt.hash(password, 5);
         
-                const query = `INSERT INTO users (user_id, first_name, last_name,email, password,role) VALUES ('${user_id}', '${first_name}', '${last_name}','${email}', '${hashedPwd}','admin')`;
+                const query = `INSERT INTO users (user_id, first_name, last_name,email, password,role) VALUES ('${user_id}', '${first_name}', '${last_name}','${email}', '${hashedPwd}','user')`;
         
                 mssql.connect(sqlConfig).then(pool => {
                     return pool.request().query(query);
@@ -124,14 +124,21 @@ export const loginRegister = async(req:Request, res: Response) =>{  try {
 
 export const getAllUsers = async(req:Request, res:Response)=>{
     try {
+        const checkUserQuery = `SELECT * FROM users`;
 
-        const pool = await mssql.connect(sqlConfig)
-
-        let users = (await pool.request().execute('fetchAllUsers')).recordset
-
-        return res.status(200).json({
-            users: users
+        mssql.connect(sqlConfig)
+        .then(pool => {
+            return pool.request().query(checkUserQuery);
         })
+        .then(async result => {
+            if (result.recordset.length > 0) {
+                console.log("success", result);
+
+                return res.status(200).json(result.recordset)
+
+            }
+
+    })
         
     } catch (error) {
         return res.json({

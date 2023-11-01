@@ -10,6 +10,8 @@ export interface ExtendedUser extends Request{
 
 export const verifyToken = (req:ExtendedUser, res:Response, next:NextFunction) =>{
     try {
+        console.log(req.headers);
+        
         const token = req.headers['token'] as string
 
         if(!token){
