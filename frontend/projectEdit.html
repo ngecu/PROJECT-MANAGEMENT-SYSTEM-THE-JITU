@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Edit</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="/static/css/projectedit.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <nav class="nav-bar">
+        <ul class="left_side">
+          <li>
+            <a href="#"><i class="material-icons md-18">menu</i></a>
+          </li>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <ul class="right">
+          <li>
+            <a href="#"><i class="material-icons md-18">search</i></a>
+          </li>
+          <li>
+            <a href="#"><i class="material-icons md-18">forum</i></a>
+          </li>
+
+          <li>
+            <a href="#"><i class="material-icons md-18">notifications</i></a>
+          </li>
+
+          <li>
+            <a href="#"><i class="material-icons md-18">search</i></a>
+          </li>
+
+          <li>
+            <a href="#"></a>
+          </li>
+
+          <li>
+            <a href="#"><i class="material-icons md-18">search</i></a>
+          </li>
+        </ul>
+      </nav>
+      <div class="project-body">
+        <div class="header">
+          <div class="leftside">
+            <h2>Project Edit</h2>
+          </div>
+          <div class="rightside">
+            <nav class="mini-navbar">
+              <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Project Edit</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="generalwrap">
+          <div class="top">
+            <div class="l-top">
+              <h3>General</h3>
+            </div>
+            <div  class="r-top">
+              <input id="remove"type="submit" value="-">
+            </div>
+            <!-- <div class="r-top_add">
+              <input id ="addbtn"  type="submit" value="+">
+            </div> -->
+          </div>
+          <form id="project_edit">
+            <div id="hideable-content" class="project-body">
+
+            <label for="Project_name">Project Name</label> <br />
+            <input type="text" placeholder="project-management" /><br />
+            <label for="description">Project Description</label><br />
+            <textarea
+              name="description"
+              id="description"
+              cols="30"
+              rows="10"
+            ></textarea
+            ><br />
+            <label for="status">Status</label> <br />
+            <input type="text" />
+          </div>
+          <div class="editbtns">
+            <div class="cancelbtn">
+              <input type="submit" value="Cancel">
+            </div>
+            <div class="savebtn">
+              <input type="submit" value="Save Changes">
+            </div>
+          </div>
+            </form>
+
+      </div>
+    </div>
+    <script src="/static/js/projectedit.js"></script>
+  </body>
+</html>
