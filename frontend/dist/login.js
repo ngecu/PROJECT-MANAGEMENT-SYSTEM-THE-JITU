@@ -22,7 +22,7 @@ login_form.addEventListener('submit', (e) => {
     }
     if (password && email) {
         const promise2 = new Promise((res, rej) => {
-            fetch('http://localhost:4400/user/login', {
+            fetch('http://localhost:5000/user/login', {
                 headers: {
                     'Accept': 'application/json',
                     'Content-type': 'application/json'
@@ -45,7 +45,7 @@ login_form.addEventListener('submit', (e) => {
         function redirect() {
             const token = localStorage.getItem('token');
             new Promise((resolve, reject) => {
-                fetch('http://localhost:4400/user/check_user_details', {
+                fetch('http://localhost:5000/user/check_user_details', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-type': 'application/json',

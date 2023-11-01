@@ -30,7 +30,7 @@ login_form.addEventListener('submit', (e)=>{
 
     if(password && email){
         const promise2 = new Promise<{error?:String, message?:string, token?:string}>((res, rej)=>{
-            fetch('http://localhost:4400/user/login',{
+            fetch('http://localhost:5000/user/login',{
                 headers:{
                     'Accept': 'application/json',
                     'Content-type': 'application/json'
@@ -63,7 +63,7 @@ login_form.addEventListener('submit', (e)=>{
             new Promise <{info:{
                 user_id?:string, role?:string, name?:string, email?:string
             }}>((resolve, reject)=>{
-                fetch('http://localhost:4400/user/check_user_details', {
+                fetch('http://localhost:5000/user/check_user_details', {
                     headers:{
                         'Accept': 'application/json',
                         'Content-type': 'application/json',

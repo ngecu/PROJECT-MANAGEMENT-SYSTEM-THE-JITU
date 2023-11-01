@@ -1,20 +1,24 @@
-// CREATE
+import { Request, Response } from 'express'
+import mssql from 'mssql'
+import { sqlConfig } from '../config/sqlConfig'
+// import Connection from '../dbhelpers/dbhelpers'
 
-import { NextFunction, Request, Response } from "express";
 
-export const CreateProject = (
-  res: Response,
-  req: Request
-  //   next: NextFunction
-) => {
-  const frontend_data = req.body;
 
-  console.log(req.body);
+export const getAllProjects = async(req:Request, res:Response)=>{
+    try {
 
-  //   res.json(frontend_data)
-};
+        const pool = await mssql.connect(sqlConfig)
 
-// READ
-export const getAllProjects = (res: Response, req: Request) => {};
-// UPDATE
-// DELETE
+        let projects = (await pool.request().execute('fetchAllProjects')).recordset
+
+        return res.status(200).json({
+          projects: projects
+        })
+        
+    } catch (error) {
+        return res.json({
+            error: error
+        })
+    }
+}

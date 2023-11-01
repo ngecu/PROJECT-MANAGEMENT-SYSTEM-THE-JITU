@@ -14,6 +14,8 @@ const dbhelper = new Connection
 export const registerUser= async(req:Request, res: Response) =>{
     try {
         let {first_name, last_name,password} = req.body
+        console.log(req.body);
+        
 
         let user_id = v4()
 
@@ -22,8 +24,10 @@ export const registerUser= async(req:Request, res: Response) =>{
 
         
         let result = dbhelper.execute('registerUser', {
-            user_id, name, first_name, last_name, password: hashedPwd
+            user_id, first_name, last_name, password: hashedPwd
         })
+        
+        console.log("success");
         
 
         return res.status(200).json({
@@ -31,6 +35,8 @@ export const registerUser= async(req:Request, res: Response) =>{
         })
         
     } catch (error) {
+        console.log(error);
+        
         return res.json({
             error: error
         })
@@ -38,8 +44,11 @@ export const registerUser= async(req:Request, res: Response) =>{
 }
 
 export const loginRegister = async(req:Request, res: Response) =>{
+    console.log(req.body);
     try {
         const {email, password} = req.body
+       
+        
 
         const pool = await mssql.connect(sqlConfig)
 

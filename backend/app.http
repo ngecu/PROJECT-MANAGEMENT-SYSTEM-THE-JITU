@@ -1,8 +1,9 @@
-POST http://localhost:5200/project/createProject
+POST http://localhost:5000/user/register
 Content-Type: application/json
 
 {
 
-   "id":"sdasdasad",
-   "saddsadad":"kinuthia"
+   "first_name":"Robin",
+   "last_name":"Ngecu",
+   "password":"asd"
 }

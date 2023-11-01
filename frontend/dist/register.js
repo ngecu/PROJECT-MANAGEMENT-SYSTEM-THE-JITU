@@ -16,7 +16,7 @@ reg_form.addEventListener('submit', (event) => {
     if (state) {
         if (pass == confirm_pass) {
             const promise = new Promise((resolve, reject) => {
-                fetch('http://localhost:4400/user/register', {
+                fetch('http://localhost:5000/user/register', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-type': 'application/json'
