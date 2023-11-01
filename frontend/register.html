@@ -7,13 +7,19 @@
   <title>Project Management System</title>
 </head>
 <body>
+
+  <div class="toast error-toast">
+    <span class="toast-message" id="error-message"></span>
+  </div>
+
+  
   <div class="register-container">
     <div class="register-card">
         <div class="logo">
             <img src="static/images/logo.svg" alt="">
         </div>
         <h3>Project Management System</h3>
-        <small>Register a new user</small>
+        <small id="small-error">Register a new user</small>
         <form id="registration-form">
       <div class="input-container">
         <input type="text" id="first_name" placeholder="First Name">

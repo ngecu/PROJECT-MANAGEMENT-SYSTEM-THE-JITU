@@ -3,8 +3,27 @@ let last_name = document.getElementById('last_name') as HTMLInputElement
 let email = document.getElementById('email') as HTMLInputElement
 let password = document.getElementById('password') as HTMLInputElement
 let confirm_password = document.getElementById('confirm_password') as HTMLInputElement
-
+let eror_container = document.getElementById('small-error') as HTMLElement
 let reg_form = document.getElementById('registration-form') as HTMLFormElement
+
+function showToast(message:string, type = 'error') {
+    const toast = document.querySelector('.toast') as HTMLElement;
+    const messageElement = document.getElementById('error-message') as HTMLElement;
+  
+    messageElement.innerText = message;
+  
+    if (type === 'error') {
+      toast.classList.add('error-toast');
+    } 
+  
+    toast.style.display = 'block';
+    setTimeout(() => {
+      toast.style.display = 'none';
+      toast.classList.remove('error-toast');
+    }, 3000); 
+  }
+  
+  
 
 reg_form.addEventListener('submit', (event)=>{
     event.preventDefault()
@@ -34,20 +53,26 @@ reg_form.addEventListener('submit', (event)=>{
                         "password": pass
                     })
                 }).then((res=>res.json())).then(data=>{
+                    
+                    if (data.error) {
+                        showToast(`${data.error}`);
+
+                    }
+                    else{
+                        location.href = 'login.html'
+                    }
+                    
                     console.log(data);
-                    gotoLogin()
+                
                     resolve(data) 
                 }).catch(error=>{
                     console.log(error);
                 })
             })
 
-            function gotoLogin(){
-                location.href = 'login.html'
-            }
          
         }else{
-            console.log('Password mismatch');
+            showToast('Password mismatch');
         }
     }
 })

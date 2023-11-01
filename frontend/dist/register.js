@@ -4,7 +4,21 @@ let last_name = document.getElementById('last_name');
 let email = document.getElementById('email');
 let password = document.getElementById('password');
 let confirm_password = document.getElementById('confirm_password');
+let eror_container = document.getElementById('small-error');
 let reg_form = document.getElementById('registration-form');
+function showToast(message, type = 'error') {
+    const toast = document.querySelector('.toast');
+    const messageElement = document.getElementById('error-message');
+    messageElement.innerText = message;
+    if (type === 'error') {
+        toast.classList.add('error-toast');
+    }
+    toast.style.display = 'block';
+    setTimeout(() => {
+        toast.style.display = 'none';
+        toast.classList.remove('error-toast');
+    }, 3000);
+}
 reg_form.addEventListener('submit', (event) => {
     event.preventDefault();
     let Fname = first_name.value;
@@ -29,19 +43,21 @@ reg_form.addEventListener('submit', (event) => {
                         "password": pass
                     })
                 }).then((res => res.json())).then(data => {
+                    if (data.error) {
+                        showToast(`${data.error}`);
+                    }
+                    else {
+                        location.href = 'login.html';
+                    }
                     console.log(data);
-                    gotoLogin();
                     resolve(data);
                 }).catch(error => {
                     console.log(error);
                 });
             });
-            function gotoLogin() {
-                location.href = 'login.html';
-            }
         }
         else {
-            console.log('Password mismatch');
+            showToast('Password mismatch');
         }
     }
 });

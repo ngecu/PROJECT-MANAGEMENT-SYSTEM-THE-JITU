@@ -10,7 +10,7 @@ body {
 }
 
 .sidebar {
-  width: 250px; /* Adjust the width as needed */
+  width: 250px;
   background-color: #333;
   padding: 20px;
   height: 100%;
@@ -46,7 +46,7 @@ body {
   color: red;
 }
 .sidebar a.active {
-  background-color: #007BFF; /* Change the color for active links */
+  background-color: #007BFF;
   color: white;
 }
 .sidebar .profile-container {
@@ -109,13 +109,14 @@ body {
   transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
   -webkit-user-select: none;
      -moz-user-select: none;
+      -ms-user-select: none;
           user-select: none;
   vertical-align: middle;
   white-space: nowrap;
 }
 
 .main {
-  flex: 1; /* Takes up the remaining space */
+  flex: 1;
   padding: 20px;
   background-color: #f0f0f0;
   height: 100%;
@@ -259,27 +260,39 @@ body {
   line-height: normal;
 }
 
-/* Common badge styles */
 .badge {
   display: inline-block;
   padding: 5px 10px;
   border-radius: 4px;
 }
 
-/* Success badge */
 .badge-success {
   background-color: #28a745;
   color: #fff;
 }
 
-/* Warning badge */
 .badge-warning {
   background-color: #ffc107;
   color: #000;
 }
 
-/* Danger badge */
 .badge-danger {
   background-color: #dc3545;
   color: #fff;
+}
+
+.toast {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: #ff0000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+  transition: opacity 0.3s;
+}
+
+.error-toast {
+  background-color: #ff0000;
 }/*# sourceMappingURL=style.css.map */

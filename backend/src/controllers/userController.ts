@@ -15,29 +15,53 @@ export const registerUser = async (req: Request, res: Response) => {
         const { first_name, last_name,email, password } = req.body;
         console.log(req.body);
 
-        const user_id = v4();
+        const checkEmailQuery = `SELECT * FROM users WHERE email = '${email}'`;
 
-        const hashedPwd = await bcrypt.hash(password, 5);
-
-        const query = `INSERT INTO users (user_id, first_name, last_name,email, password) VALUES ('${user_id}', '${first_name}', '${last_name}','${email}', '${hashedPwd}')`;
 
         mssql.connect(sqlConfig).then(pool => {
-            return pool.request().query(query);
-        }).then(result => {
+            return pool.request().query(checkEmailQuery);
+        }).then(async result => {
             console.log("success", result);
 
+            if (result.recordset.length > 0) {
+                console.log("cannot proceed");
+                
+                return res.status(500).json({error:"User Already Exists"})
+            }
+            else{
+                const user_id = v4();
+
+                const hashedPwd = await bcrypt.hash(password, 5);
+        
+                const query = `INSERT INTO users (user_id, first_name, last_name,email, password) VALUES ('${user_id}', '${first_name}', '${last_name}','${email}', '${hashedPwd}')`;
+        
+                mssql.connect(sqlConfig).then(pool => {
+                    return pool.request().query(query);
+                }).then(result => {
+                    console.log("success", result);
+        
+                  
+                    return res.status(200).json({
+                        message: 'User registered successfully'
+                    });
+                }).catch(err => {
+                    console.log(err);
+        
+                  
+                    return res.status(500).json({
+                        error: err.message || 'An error occurred while registering the user.'
+                    });
+                });
+            }
+
+            
           
             return res.status(200).json({
                 message: 'User registered successfully'
             });
-        }).catch(err => {
-            console.log(err);
+        })
 
-          
-            return res.status(500).json({
-                error: err.message || 'An error occurred while registering the user.'
-            });
-        });
+       
     } catch (error) {
         console.log(error);
 
