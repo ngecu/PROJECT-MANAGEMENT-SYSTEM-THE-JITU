@@ -10,38 +10,44 @@ import { ExtendedUser } from '../middleware/verifyToken'
 import Connection from '../dbhelpers/dbhelpers'
 
 const dbhelper = new Connection
-
-export const registerUser= async(req:Request, res: Response) =>{
+export const registerUser = async (req: Request, res: Response) => {
     try {
-        let {first_name, last_name,password} = req.body
+        const { first_name, last_name,email, password } = req.body;
         console.log(req.body);
-        
 
-        let user_id = v4()
+        const user_id = v4();
 
-        const hashedPwd = await bcrypt.hash(password, 5)
+        const hashedPwd = await bcrypt.hash(password, 5);
 
+        const query = `INSERT INTO users (user_id, first_name, last_name,email, password) VALUES ('${user_id}', '${first_name}', '${last_name}','${email}', '${hashedPwd}')`;
 
-        
-        let result = dbhelper.execute('registerUser', {
-            user_id, first_name, last_name, password: hashedPwd
-        })
-        
-        console.log("success");
-        
+        mssql.connect(sqlConfig).then(pool => {
+            return pool.request().query(query);
+        }).then(result => {
+            console.log("success", result);
 
-        return res.status(200).json({
-            message: 'User  registered successfully'
-        })
-        
+          
+            return res.status(200).json({
+                message: 'User registered successfully'
+            });
+        }).catch(err => {
+            console.log(err);
+
+          
+            return res.status(500).json({
+                error: err.message || 'An error occurred while registering the user.'
+            });
+        });
     } catch (error) {
         console.log(error);
-        
-        return res.json({
-            error: error
-        })
+
+        // Send an error response for exceptions
+        return res.status(500).json({
+            error: error.message || 'An error occurred while processing the request.'
+        });
     }
-}
+};
+
 
 export const loginRegister = async(req:Request, res: Response) =>{
     console.log(req.body);
@@ -110,6 +116,27 @@ export const getAllUsers = async(req:Request, res:Response)=>{
         })
     }
 }
+
+export const getUserProfile = async(req:Request, res:Response)=>{
+    try {
+
+        const userID = req.params.id;
+
+        let user = dbhelper.execute('fetchUserProfile', {
+                        userID
+        })
+
+        return res.status(200).json({
+            user
+        })
+        
+    } catch (error) {
+        return res.json({
+            error: error
+        })
+    }
+}
+
 
 export const checkUserDetails = async (req:ExtendedUser, res:Response)=>{
     

@@ -1,6 +1,6 @@
 import express, { json } from "express";
 import project_router from "./routes/projectRoutes";
-// import { testConnection } from "./config/sqlConfig";
+import { testConnection } from "./config/sqlConfig";
 import cors from 'cors'
 import user_router from "./routes/userRoutes";
 const app = express();
@@ -18,5 +18,5 @@ const PORT = 5000;
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT} `);
-  // testConnection();
+  testConnection();
 });
