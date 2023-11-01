@@ -155,14 +155,14 @@ a:visited {
     margin: 0;
     background-color: #f0f0f0;
 }
-.main .top-bar .dashboard-card {
+.dashboard-card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 40%;
+    width: 80vw;
     padding: 20px;
-    margin: 10px;
+    margin: 20px;
     display: flex;
     gap: 10px;
 }
@@ -309,10 +309,7 @@ a:visited {
   
   
 .add-project{
-    margin-left: 20%;
-
-  
-  
+    margin-left: 10%;
   
 }
   

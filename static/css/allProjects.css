@@ -416,3 +416,73 @@ input[name="status"] {
     color: white;
 }
   
+
+
+
+
+
+.project-section {
+    font-family: Arial, sans-serif;
+    border: 1px;
+
+}
+
+
+
+.all-projects{
+    margin: 40px;
+    border: 1px gray;
+    background-color: white;
+    border-radius: 5px;
+}
+.project-titles {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.project-row {
+    /* border: 1px solid #ccc; */
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
+.project-info {
+display: flex;
+flex: 1;
+justify-content: space-between;
+}
+
+.project-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.view-button {
+    background-color: blue;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-button {
+    background-color: green;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
