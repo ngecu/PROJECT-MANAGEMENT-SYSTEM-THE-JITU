@@ -1,27 +1,33 @@
-(async function() {
-    const data = [
-      { year: 2010, count: 10 },
-      { year: 2011, count: 20 },
-      { year: 2012, count: 15 },
-      { year: 2013, count: 25 },
-      { year: 2014, count: 22 },
-      { year: 2015, count: 30 },
-      { year: 2016, count: 28 },
-    ];
-  
-    new Chart(
-      document.getElementById('acquisitions'),
-      {
-        type: 'doughnut',
-        data: {
-          labels: data.map(row => row.year),
-          datasets: [
-            {
-              label: 'Acquisitions by year',
-              data: data.map(row => row.count)
-            }
-          ]
+var ctx = document.getElementById('myChart').getContext('2d');
+
+// Static data for the donut chart
+var donutData = {
+  labels: ['Confirmed Cases', 'Recovered Cases', 'Deaths'],
+  datasets: [{
+    data: [5000, 3000, 1000], // Replace these values with your static data
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.6)',
+      'rgba(54, 162, 235, 0.6)',
+      'rgba(255, 206, 86, 0.6'
+    ],
+    hoverOffset: 4
+  }]
+};
+
+new Chart(ctx, {
+  type: 'doughnut',
+  data: donutData,
+  options: {
+    responsive: true,
+    aspectRatio: 1,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: {
+          fontColor: 'white'
         }
       }
-    );
-  })();
+    }
+  }
+});
