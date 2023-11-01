@@ -1,0 +1,8 @@
+POST http://localhost:5200/project/createProject
+Content-Type: application/json
+
+{
+
+   "id":"sdasdasad",
+   "saddsadad":"kinuthia"
+}

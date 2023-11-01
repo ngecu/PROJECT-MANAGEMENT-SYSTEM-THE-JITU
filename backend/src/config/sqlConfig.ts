@@ -1,33 +1,32 @@
-import dotenv from 'dotenv'
-import mssql from 'mssql'
-dotenv.config()
+import mssql from "mssql";
+import dotenv from "dotenv";
 
+dotenv.config();
 export const sqlConfig = {
-    user : process.env.DB_USER as string,
-    password: process.env.DB_PWD as string,
-    database: process.env.DB_NAME as string,
-    server : 'DESKTOP-E7G5E3R\\MSSQLSERVER01',
-    port: 1433,
-    pool:{
-        max: 10,
-        min: 0,
-        idleTimeoutMillis: 30000
-    },
-    options:{
-        encrypt: false,
-        trustServerCertificate: true
-    }
-}
+  user: process.env.DB_USER,
+  password: process.env.DB_PWD,
+  database: process.env.DB_NAME,
+  server: "localhost",
+  port: 1433,
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000,
+  },
+  options: {
+    encrypt: false, // for azure
+    trustServerCertificate: true, // change to true for local dev / self-signed certs
+  },
+};
 
-async function TestConnection() {
-    const pool=await mssql.connect(sqlConfig)
- 
- 
-if (pool.connected){
-    console.log('conneted to database')
- 
+export async function testConnection() {
+  // console.log(sqlConfig);
+
+  const pool = await mssql.connect(sqlConfig);
+  //testing if db is connected
+  if (pool.connected) {
+    console.log("connected to database");
+  } else {
+    console.log("connection failed");
+  }
 }
- 
-}
-TestConnection()
- 
