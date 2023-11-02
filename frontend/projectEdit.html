@@ -8,7 +8,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
-    <link rel="stylesheet" href="/static/css/projectedit.css" />
+    <link rel="stylesheet" href="../frontend/static/css/projectedit.css" />
   </head>
   <body>
     <div class="wrapper">
@@ -45,6 +45,7 @@
           </li>
         </ul>
       </nav>
+
       <div class="project-body">
         <div class="header">
           <div class="leftside">
@@ -74,9 +75,9 @@
           <form id="project_edit">
             <div id="hideable-content" class="project-body">
 
-            <label for="Project_name">Project Name</label> <br />
+            <label class ="Project_name">Project Name</label> <br />
             <input type="text" placeholder="project-management" /><br />
-            <label for="description">Project Description</label><br />
+            <label class ="description">Project Description</label><br />
             <textarea
               name="description"
               id="description"
@@ -84,21 +85,21 @@
               rows="10"
             ></textarea
             ><br />
-            <label for="status">Status</label> <br />
+            <label class ="status">Status</label> <br />
             <input type="text" />
           </div>
           <div class="editbtns">
             <div class="cancelbtn">
-              <input type="submit" value="Cancel">
+              <input type="submit" value="Cancel" id="">
             </div>
             <div class="savebtn">
-              <input type="submit" value="Save Changes">
+              <input type="submit" id="saveChangesBtn" value="Save Changes">
             </div>
           </div>
             </form>
 
       </div>
     </div>
-    <script src="/static/js/projectedit.js"></script>
+    <script src="../frontend/static/js/projectedit.js"></script>
   </body>
 </html>
