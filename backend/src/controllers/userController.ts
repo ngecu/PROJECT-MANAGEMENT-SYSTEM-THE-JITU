@@ -8,8 +8,36 @@ import jwt from 'jsonwebtoken'
 import { LoginUser } from '../interfaces/user'
 import { ExtendedUser } from '../middleware/verifyToken'
 import Connection from '../dbhelpers/dbhelpers'
+import useragent from 'useragent'
+import fs from 'fs';
+import handlebars from 'handlebars'
+import sendEmail from '../utils/sendEmail'
 
 const dbhelper = new Connection
+
+
+
+const templateFilePath = "backend/controllers/email-template.hbs"
+
+// Function to read the contents of the HTML template file
+const readHTMLFile = (path:string) => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, { encoding: 'utf-8' }, (error, htmlContent) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(htmlContent);
+      }
+    });
+  });
+};
+
+// Function to compile and render the email template
+const renderEmailTemplate = (template:any, data:any) => {
+  const compiledTemplate = handlebars.compile(template);
+  return compiledTemplate(data);
+};
+
 export const registerUser = async (req: Request, res: Response) => {
     try {
         const { first_name, last_name,email, password } = req.body;
@@ -39,6 +67,51 @@ export const registerUser = async (req: Request, res: Response) => {
                     return pool.request().query(query);
                 }).then(result => {
                     console.log("success", result);
+
+                    
+
+    // Example user agent string
+    const userAgentString = req.headers['user-agent'];
+
+    // Parse the user agent string
+    const agent = useragent.parse(userAgentString);
+
+    // Retrieve the browser name
+    const browserName = agent.family;
+
+    // Retrieve the operating system
+    const operatingSystem = agent.os.toString();
+
+    console.log(userAgentString)
+    console.log(operatingSystem)
+
+    readHTMLFile(templateFilePath)
+  .then((templateContent) => {
+    // Define the data for the template variables
+    const templateData = {
+        first_name,email,
+      browserName,
+      operatingSystem,
+      
+    };
+
+    // Render the email template with the data
+    const renderedTemplate = renderEmailTemplate(templateContent, templateData);
+
+    // Send the email
+    sendEmail(email, "Welcome", renderedTemplate)
+      .then(() => {
+        console.log('Email sent successfully');
+        res.status(200).send({ message: "Password reset link sent to your email account" });
+
+      })
+      .catch((error) => {
+        console.log('Failed to send email:', error);
+      });
+  })
+  .catch((error) => {
+    console.log('Failed to read template file:', error);
+  });
         
                   
                     return res.status(200).json({
