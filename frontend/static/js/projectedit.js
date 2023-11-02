@@ -5,9 +5,9 @@ const saveChangesBtn = document.getElementById("saveChangesBtn");
 const projectStatus = document.querySelector('input[type="text"]').value;
 const cancelChangeBtn = document.getElementById("cancelEdit");
 
-cancelChangeBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-});
+// cancelChangeBtn.addEventListener("click", (e) => {
+//   e.preventDefault();
+// });
 
 saveChangesBtn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -19,14 +19,15 @@ saveChangesBtn.addEventListener("click", (e) => {
   if (projectName.trim() === "" && projectDescription.trim() === "") {
     alert("You cannot save empty changes");
   } else {
-    console.log("Project Name:", projectName);
-    console.log("Project Description:", projectDescription);
-    console.log("Project Status:", projectStatus);
+    const input = {
+      projectName,
+      projectDescription,
+      projectStatus,
+    };
+    // console.log("Project Name:", projectName);
+    // console.log("Project Description:", projectDescription);
+    // // console.log("Project Status:", projectStatus);
   }
-
-  // console.log("Project Name:", projectName);
-  // console.log("Project Description:", projectDescription);
-  // console.log("Project Status:", projectStatus);
 });
 
 hideProjectBody.addEventListener("click", (e) => {
