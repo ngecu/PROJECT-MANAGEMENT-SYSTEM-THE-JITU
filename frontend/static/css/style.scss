@@ -389,3 +389,19 @@ line-height: normal;
 .delete-button{
     background-color: #DF3C24;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.no-data-row {
+    background-color: #dc3545;
+    color: white;
+}

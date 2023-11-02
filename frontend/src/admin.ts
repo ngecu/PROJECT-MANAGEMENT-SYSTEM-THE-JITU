@@ -13,7 +13,7 @@ if(!token || !user_email_logged){
     location.href  = "login.html"
 }
 
-const fetchAllUsers = (user_token:string)=>{
+export const fetchAllUsers = (user_token:string)=>{
     console.log("fethching all users");
     
     fetch('http://localhost:5000/user/allUsers',{

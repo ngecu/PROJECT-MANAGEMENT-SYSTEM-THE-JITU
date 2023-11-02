@@ -19,7 +19,7 @@ const dbhelper = new Connection
 
 const templateFilePath = "src/controllers/email-template.hbs"
 
-// Function to read the contents of the HTML template file
+
 const readHTMLFile = (path:string) => {
   return new Promise((resolve, reject) => {
     fs.readFile(path, { encoding: 'utf-8' }, (error, htmlContent) => {
@@ -32,7 +32,7 @@ const readHTMLFile = (path:string) => {
   });
 };
 
-// Function to compile and render the email template
+
 const renderEmailTemplate = (template:any, data:any) => {
   const compiledTemplate = handlebars.compile(template);
   return compiledTemplate(data);
@@ -61,7 +61,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
                 const hashedPwd = await bcrypt.hash(password, 5);
         
-                const query = `INSERT INTO users (user_id, first_name, last_name,email, password,role) VALUES ('${user_id}', '${first_name}', '${last_name}','${email}', '${hashedPwd}','user')`;
+                const query = `INSERT INTO users (user_id, first_name, last_name,email, password,role) VALUES ('${user_id}', '${first_name}', '${last_name}','${email}', '${hashedPwd}','admin')`;
         
                 mssql.connect(sqlConfig).then(pool => {
                     return pool.request().query(query);

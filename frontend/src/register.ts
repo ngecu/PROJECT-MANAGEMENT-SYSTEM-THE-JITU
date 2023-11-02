@@ -6,7 +6,7 @@ let confirm_password = document.getElementById('confirm_password') as HTMLInputE
 let eror_container = document.getElementById('small-error') as HTMLElement
 let reg_form = document.getElementById('registration-form') as HTMLFormElement
 
-function showToast(message:string, type = 'error') {
+function showToast2(message:string, type = 'error') {
     const toast = document.querySelector('.toast') as HTMLElement;
     const messageElement = document.getElementById('error-message') as HTMLElement;
   
@@ -55,7 +55,7 @@ reg_form.addEventListener('submit', (event)=>{
                 }).then((res=>res.json())).then(data=>{
                     
                     if (data.error) {
-                        showToast(`${data.error}`);
+                        showToast2(`${data.error}`);
 
                     }
                     else{
@@ -72,7 +72,7 @@ reg_form.addEventListener('submit', (event)=>{
 
          
         }else{
-            showToast('Password mismatch');
+            showToast2('Password mismatch');
         }
     }
 })

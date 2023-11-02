@@ -8,12 +8,13 @@ const dbhelper = new Connection
 
 export const createProject = async (req: Request, res: Response) => {
     const { title, description,user_id } = req.body;
-
+    console.log(req.body);
+    
     try {
     
         const insertQuery = `
-            INSERT INTO projects (title, description,user_id)
-            VALUES ('${title}', '${description}','${user_id}')
+            INSERT INTO projects (title, description,user_id,status)
+            VALUES ('${title}', '${description}','${user_id}','incomplete')
         `;
 
         const pool = await mssql.connect(sqlConfig);
@@ -27,12 +28,17 @@ export const createProject = async (req: Request, res: Response) => {
 };
 
 export const getAllProjects = async (req: Request, res: Response) => {
+  
+    
     try {
         const query = 'SELECT * FROM projects'; 
         const pool = await mssql.connect(sqlConfig);
         const result = await pool.request().query(query);
 
         const projects = result.recordset;
+        if (projects.length == 0) {
+            return res.status(200).json({projects:"No Projects"});
+        }
 
         return res.status(200).json(projects);
     } catch (error) {

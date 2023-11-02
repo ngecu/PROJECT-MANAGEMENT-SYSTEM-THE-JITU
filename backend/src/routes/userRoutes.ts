@@ -7,7 +7,7 @@ const user_router = Router()
 
 user_router.post('/register', registerUser)
 user_router.post('/login', loginRegister)
-user_router.get('/allUsers',verifyToken, getAllUsers)
+user_router.get('/allUsers', getAllUsers)
 user_router.delete('/:user_id',verifyToken, deleteUser);
 user_router.get('/:user_id', getUserProfile);
 

@@ -1,6 +1,10 @@
 body {
   margin: 0;
   padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: lightgray;
+  font-family: Arial, sans-serif;
   font-family: Arial, sans-serif;
 }
 
@@ -10,7 +14,7 @@ body {
 }
 
 .sidebar {
-  width: 250px;
+  width: 250px; /* Adjust the width as needed */
   background-color: #333;
   padding: 20px;
   height: 100%;
@@ -21,14 +25,17 @@ body {
   font-weight: 400;
   line-height: normal;
 }
+
 .sidebar ul {
   list-style: none;
   padding: 0;
 }
+
 .sidebar li {
   margin: 0;
   padding: 0;
 }
+
 .sidebar a {
   color: #C2C7D0;
   font-family: Inter;
@@ -41,24 +48,39 @@ body {
   gap: 10px;
   padding: 11px;
 }
+
 .sidebar a img {
   width: 20px;
   color: red;
 }
-.sidebar a.active {
-  background-color: #007BFF;
+
+/* a.active {
+  background-color: #007BFF; 
   color: white;
+} */
+a:hover {
+  color: white;
+  background-color: blue;
 }
+
+a:visited {
+  color: white;
+  background-color: blue;
+}
+
 .sidebar .profile-container {
   display: flex;
   gap: 10px;
 }
+
 .sidebar .profile-container .profile-image-container {
   width: 20%;
 }
+
 .sidebar .profile-container .profile-image-container img {
   width: 100%;
 }
+
 .sidebar .logout-btn {
   width: 100%;
   background-color: rgb(220, 53, 69);
@@ -108,9 +130,9 @@ body {
   transition-property: color, background-color, border-color, box-shadow;
   transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+      user-select: none;
   vertical-align: middle;
   white-space: nowrap;
 }
@@ -121,6 +143,7 @@ body {
   background-color: #f0f0f0;
   height: 100%;
 }
+
 .main .top-menu .dashboard-card {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -131,6 +154,7 @@ body {
   display: flex;
   gap: 10px;
 }
+
 .main .top-bar {
   font-family: Arial, sans-serif;
   display: flex;
@@ -138,26 +162,31 @@ body {
   margin: 0;
   background-color: #f0f0f0;
 }
-.main .top-bar .dashboard-card {
+
+.dashboard-card {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 40%;
+  width: 80vw;
   padding: 20px;
-  margin: 10px;
+  margin: 20px;
   display: flex;
   gap: 10px;
 }
+
 .main .top-bar .dashboard-card .all-projects-container {
   background-color: #17A2B8;
 }
+
 .main .top-bar .dashboard-card .my-projects-container {
   background-color: #FFC107;
 }
+
 .main .top-bar .dashboard-card .users-container {
   background-color: #DC3545;
 }
+
 .main .top-bar .dashboard-card .image-container {
   padding: 2%;
   border-radius: 10px;
@@ -167,30 +196,37 @@ body {
   justify-content: center;
   color: white;
 }
+
 .main .top-bar .dashboard-card .image-container img {
   width: 120px;
 }
+
 .main .top-bar .number {
   font-size: 48px;
   font-weight: bold;
 }
+
 .main .top-bar .content {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
 }
+
 .main .top-bar h3 {
   margin: 0;
 }
+
 .main .top-bar img {
   width: 100%;
   max-width: 250px;
   height: auto;
   margin-top: 10px;
 }
+
 .main .middle-bar {
   display: flex;
 }
+
 .main .middle-bar .empty-card {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -198,6 +234,7 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 10px;
 }
+
 .main .middle-bar .table-card {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -207,15 +244,18 @@ body {
   padding: 20px;
   margin: 10px;
 }
+
 .main .middle-bar table {
   width: 100%;
   border-collapse: collapse;
 }
+
 .main .middle-bar table th, .main .middle-bar table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
 }
+
 .main .third-bar .btn {
   color: #fff;
   border: none;
@@ -224,15 +264,19 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
+
 .main .third-bar .view-button {
   background-color: #007BFF;
 }
+
 .main .third-bar .edit-button {
   background-color: #17A2BB;
 }
+
 .main .third-bar .delete-button {
   background-color: #DF3C24;
 }
+
 .main .third-bar .table-card {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -241,10 +285,12 @@ body {
   padding: 20px;
   margin: 10px;
 }
+
 .main .third-bar table {
   width: 100%;
   border-collapse: collapse;
 }
+
 .main .third-bar table th, .main .third-bar table td {
   border: 1px solid #ddd;
   padding: 8px;
@@ -260,76 +306,125 @@ body {
   line-height: normal;
 }
 
+/* Common badge styles */
 .badge {
   display: inline-block;
   padding: 5px 10px;
   border-radius: 4px;
 }
 
+/* Success badge */
 .badge-success {
   background-color: #28a745;
   color: #fff;
 }
 
+/* Warning badge */
 .badge-warning {
   background-color: #ffc107;
   color: #000;
 }
 
+/* Danger badge */
 .badge-danger {
   background-color: #dc3545;
   color: #fff;
+} /*# sourceMappingURL=style.css.map */
+.add-project {
+  margin-left: 10%;
 }
 
-.toast {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  background-color: #ff0000;
-  color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  display: none;
-  transition: opacity 0.3s;
+.add-project-container {
+  background-color: white;
+  /* display: flex; */
+  align-items: center;
+  margin-top: 3%;
+  height: 80vh;
+  width: 60vw;
+  border-radius: 10px;
+  border: opx;
+  /* justify-content: center; */
 }
 
-.error-toast {
-  background-color: #ff0000;
-}
-
-.btn {
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  margin: 2px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.view-button {
-  background-color: #007BFF;
-}
-
-.edit-button {
-  background-color: #17A2BB;
-}
-
-.delete-button {
-  background-color: #DF3C24;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-table th, table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-.no-data-row {
-  background-color: #dc3545;
+.top-part {
+  background-color: blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
   color: white;
-}/*# sourceMappingURL=style.css.map */
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  height: 60px;
+  width: 100%;
+}
+
+.top-part p {
+  margin: 20px;
+  display: flex;
+  font-size: 50px;
+}
+
+.top-part h3 {
+  margin: 20px;
+  display: flex;
+}
+
+.add-proj {
+  margin: 20px;
+  font-size: x-large;
+}
+
+input[name=pname] {
+  width: 80%;
+  height: 40px;
+  border-radius: 5px;
+}
+
+input[name=username] {
+  width: 80%;
+  height: 40px;
+  border-radius: 5px;
+}
+
+input[name=pdescr] {
+  width: 80%;
+  height: 15vh;
+  border-radius: 5px;
+}
+
+input[name=status] {
+  width: 80%;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.buttons {
+  border: 0px;
+  padding: 10px;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons > .button {
+  border: 0px;
+  padding: 10px;
+  gap: 40px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  height: 50px;
+  width: 200px;
+}
+
+.button1 {
+  background-color: green;
+  color: white;
+}
+
+.button2 {
+  color: white;
+}/*# sourceMappingURL=add-project.css.map */

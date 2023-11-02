@@ -6,7 +6,7 @@ let password = document.getElementById('password');
 let confirm_password = document.getElementById('confirm_password');
 let eror_container = document.getElementById('small-error');
 let reg_form = document.getElementById('registration-form');
-function showToast(message, type = 'error') {
+function showToast2(message, type = 'error') {
     const toast = document.querySelector('.toast');
     const messageElement = document.getElementById('error-message');
     messageElement.innerText = message;
@@ -44,7 +44,7 @@ reg_form.addEventListener('submit', (event) => {
                     })
                 }).then((res => res.json())).then(data => {
                     if (data.error) {
-                        showToast(`${data.error}`);
+                        showToast2(`${data.error}`);
                     }
                     else {
                         location.href = 'login.html';
@@ -57,7 +57,7 @@ reg_form.addEventListener('submit', (event) => {
             });
         }
         else {
-            showToast('Password mismatch');
+            showToast2('Password mismatch');
         }
     }
 });
