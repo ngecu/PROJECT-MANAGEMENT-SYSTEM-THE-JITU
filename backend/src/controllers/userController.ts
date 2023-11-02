@@ -135,7 +135,7 @@ export const registerUser = async (req: Request, res: Response) => {
         })
 
        
-    } catch (error) {
+    } catch (error:any) {
         console.log(error);
 
         // Send an error response for exceptions
@@ -186,7 +186,7 @@ export const loginRegister = async(req:Request, res: Response) =>{  try {
             });
         });
 
-} catch (error) {
+} catch (error:any) {
     console.log(error);
 
     return res.status(500).json({
@@ -220,25 +220,53 @@ export const getAllUsers = async(req:Request, res:Response)=>{
     }
 }
 
-export const getUserProfile = async(req:Request, res:Response)=>{
+export const deleteUser = async (req: Request, res: Response) => {
+    const user_id = req.params.user_id;
+
     try {
-
-        const userID = req.params.id;
-
-        let user = dbhelper.execute('fetchUserProfile', {
-                        userID
-        })
-
-        return res.status(200).json({
-            user
-        })
+        const checkUserQuery = `SELECT * FROM users WHERE user_id = '${user_id}'`;
         
+        const pool = await mssql.connect(sqlConfig);
+        const result = await pool.request().query(checkUserQuery);
+
+        if (result.recordset.length === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const deleteQuery = `DELETE FROM users WHERE user_id = '${user_id}'`;
+        await pool.request().query(deleteQuery);
+
+        return res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
-        return res.json({
-            error: error
-        })
+        console.error(error);
+        return res.status(500).json({ error: 'An error occurred while deleting the user' });
     }
-}
+};
+
+
+export const getUserProfile = async (req: Request, res: Response) => {
+    const user_id = req.params.user_id;
+
+    try {
+        const query = `SELECT first_name, last_name, email, role FROM users WHERE user_id = '${user_id}'`;
+
+        const pool = await mssql.connect(sqlConfig);
+        const result = await pool.request().query(query);
+
+        if (result.recordset.length === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const userProfile = result.recordset[0];
+
+        return res.status(200).json(userProfile);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'An error occurred while fetching the user profile' });
+    }
+};
+
+
 
 
 export const checkUserDetails = async (req:ExtendedUser, res:Response)=>{

@@ -41,7 +41,43 @@ const fetchAllUsers = (user_token:string)=>{
 }
 
 
+const fetchAllProjects = (user_token:string)=>{
+    console.log("fethching all users");
+    
+    fetch('http://localhost:5000/project/allProjects',{
+    headers:{
+        'Accept': 'application/json',
+        'Content-type': 'application/json',
+        'token':user_token
+    },
+    method: "GET",
+  
+}).then(res => res.json()
+).then(data=>{
+    all_user.innerHTML = data.length
+
+    data.forEach(element => {
+        const element_row = `
+        <tr>
+        <td>1</td>
+        <td>Project A</td>
+        <td><span class="badge badge-success">${element.status}</span></td>
+        <td>User 1</td>
+        
+        <td>
+            <a href="project_edit.html?project=${element.project_id}" class="edit-button btn" >Edit</a>
+            <a href="project.html?project=${element.project_id}" class="view-button btn">View</button>
+            <button class="delete-button btn">Delete</button>
+        </td>
+    </tr>
+        `
+        all_tbody.innerHTML += element_row
+    });
+    console.log(data);
+})
+}
 
 
 
+fetchAllProjects(token)
 fetchAllUsers(token)
