@@ -5,7 +5,7 @@ CREATE TABLE Users (
 	email VARCHAR(50)  UNIQUE,
 	role VARCHAR(50),
 	password VARCHAR(255),
-    welcomed INT 
+    welcomed INT DEFAULT 0
 
 )
 

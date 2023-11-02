@@ -39,6 +39,9 @@ login_form.addEventListener('submit', (e)=>{
         showLoginToast('Password is required')
 
     }
+    if(!email && !password){
+        showLoginToast('All fields are required')
+    }
 
     if(password && email){
         const promise2 = new Promise<{error?:String, message?:string, token?:string}>((res, rej)=>{
@@ -61,9 +64,13 @@ login_form.addEventListener('submit', (e)=>{
                 else{
                     localStorage.setItem('token', data.token)
 
-                    redirect()
-    
-                    res(data)
+                    if(data.user.role == "admin"){
+                        location.href ="admin.html"
+                    }
+                    else{
+                        location.href ="index.html"
+                    }
+                 
 
                 }
 

@@ -57,6 +57,8 @@ const fetchAllProjects = (user_token:string)=>{
     all_user.innerHTML = data.length
 
     data.forEach(element => {
+        console.log(typeof(element));
+        
         const element_row = `
         <tr>
         <td>1</td>

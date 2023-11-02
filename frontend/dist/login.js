@@ -27,6 +27,9 @@ login_form.addEventListener('submit', (e) => {
     if (!password) {
         showLoginToast('Password is required');
     }
+    if (!email && !password) {
+        showLoginToast('All fields are required');
+    }
     if (password && email) {
         const promise2 = new Promise((res, rej) => {
             fetch('http://localhost:5000/user/login', {
@@ -46,8 +49,12 @@ login_form.addEventListener('submit', (e) => {
                 }
                 else {
                     localStorage.setItem('token', data.token);
-                    redirect();
-                    res(data);
+                    if (data.user.role == "admin") {
+                        location.href = "admin.html";
+                    }
+                    else {
+                        location.href = "index.html";
+                    }
                 }
             }).catch(error => {
                 console.log(error);

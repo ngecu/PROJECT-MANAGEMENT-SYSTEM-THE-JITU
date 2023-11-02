@@ -17,7 +17,7 @@ const dbhelper = new Connection
 
 
 
-const templateFilePath = "backend/controllers/email-template.hbs"
+const templateFilePath = "src/controllers/email-template.hbs"
 
 // Function to read the contents of the HTML template file
 const readHTMLFile = (path:string) => {
@@ -102,8 +102,9 @@ export const registerUser = async (req: Request, res: Response) => {
     sendEmail(email, "Welcome", renderedTemplate)
       .then(() => {
         console.log('Email sent successfully');
-        res.status(200).send({ message: "Password reset link sent to your email account" });
-
+        return res.status(200).json({
+            message: 'User registered successfully'
+        });
       })
       .catch((error) => {
         console.log('Failed to send email:', error);
@@ -114,9 +115,7 @@ export const registerUser = async (req: Request, res: Response) => {
   });
         
                   
-                    return res.status(200).json({
-                        message: 'User registered successfully'
-                    });
+                 
                 }).catch(err => {
                     console.log(err);
         
@@ -148,7 +147,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
 export const loginRegister = async(req:Request, res: Response) =>{  try {
     const { email, password } = req.body;
-    console.log(req.body);
+    console.log("sada",req.body);
 
     const checkUserQuery = `SELECT * FROM users WHERE email = '${email}'`;
 
@@ -174,7 +173,7 @@ export const loginRegister = async(req:Request, res: Response) =>{  try {
                 })
 
                 return res.status(200).json({
-                    message: 'User logged in successfully',token
+                    message: 'User logged in successfully',token,user:result.recordset[0] 
                 });
             }
         })
