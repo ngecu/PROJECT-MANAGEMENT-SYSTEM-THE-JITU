@@ -2,6 +2,9 @@
 let user_email = localStorage.getItem('user_email');
 let username_placeholder = document.querySelector('.username');
 let logout_btn = document.querySelector('.logout-btn');
+if (logout_btn) {
+    console.log("I exisr");
+}
 username_placeholder.innerHTML = user_email;
 logout_btn.addEventListener('click', () => {
     console.log("gfdg");

@@ -1,5 +1,7 @@
 const all_user = document.querySelector('.all-user') as HTMLDivElement;
 const all_tbody = document.querySelector('.user-tbody') as HTMLDivElement;
+let logout_btn2 = document.querySelector('.logout-btn') as HTMLButtonElement;
+
 
 interface userDetails {
     first_name:string
@@ -83,3 +85,11 @@ const fetchAllProjects = (user_token:string)=>{
 
 fetchAllProjects(token)
 fetchAllUsers(token)
+
+logout_btn2.addEventListener('click',()=>{
+    console.log("gfdg");
+    
+    localStorage.removeItem('user_email')
+    localStorage.removeItem('token')
+    location.href = "login.html"
+})

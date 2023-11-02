@@ -295,4 +295,25 @@ body {
 
 .error-toast {
   background-color: #ff0000;
+}
+
+.btn {
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin: 2px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.view-button {
+  background-color: #007BFF;
+}
+
+.edit-button {
+  background-color: #17A2BB;
+}
+
+.delete-button {
+  background-color: #DF3C24;
 }/*# sourceMappingURL=style.css.map */

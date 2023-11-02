@@ -6,6 +6,12 @@ let login_form = document.getElementById('login-form') as HTMLFormElement
 let email_error = document.querySelector('#email-error') as HTMLSpanElement
 let password_error = document.querySelector('#password-error') as HTMLSpanElement
 
+const checkIfLoggedIn = ()=>{
+   const user_email =  localStorage.getItem('user_email');
+   if(!user_email){
+    location.href  = "login.html"
+   }
+}
 
 function showLoginToast(message:string, type = 'error') {
     const toast = document.querySelector('.toast') as HTMLElement;
@@ -62,13 +68,17 @@ login_form.addEventListener('submit', (e)=>{
                     showLoginToast(data.error)
                 }
                 else{
-                    localStorage.setItem('token', data.token)
+                   
+                    localStorage.setItem('role', data.user.role)
+                    localStorage.setItem('user_email', data.user.email)
+
 
                     if(data.user.role == "admin"){
+                        localStorage.setItem('token', data.token)
                         location.href ="admin.html"
                     }
                     else{
-                        location.href ="index.html"
+                        location.href ="user.html"
                     }
                  
 

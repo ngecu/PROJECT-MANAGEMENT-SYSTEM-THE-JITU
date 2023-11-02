@@ -368,3 +368,24 @@ line-height: normal;
     background-color: #ff0000;
   }
   
+
+  .btn {
+    // background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.view-button{
+    background-color: #007BFF;
+}
+
+.edit-button{
+    background-color: #17A2BB;
+}
+.delete-button{
+    background-color: #DF3C24;
+}
