@@ -102,9 +102,7 @@ export const registerUser = async (req: Request, res: Response) => {
     sendEmail(email, "Welcome", renderedTemplate)
       .then(() => {
         console.log('Email sent successfully');
-        return res.status(200).json({
-            message: 'User registered successfully'
-        });
+     
       })
       .catch((error) => {
         console.log('Failed to send email:', error);
