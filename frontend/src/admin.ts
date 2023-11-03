@@ -28,7 +28,7 @@ export const fetchAllUsers = (user_token:string)=>{
 ).then(data=>{
     all_user.innerHTML = data.length
 
-    data.forEach(element => {
+    data.forEach((element:any) => {
         const element_row = `
         <tr>
 <td>#</td>
@@ -58,7 +58,7 @@ const fetchAllProjects = (user_token:string)=>{
 ).then(data=>{
     all_user.innerHTML = data.length
 
-    data.forEach(element => {
+    data.forEach((element:any) => {
         console.log(typeof(element));
         
         const element_row = `

@@ -25,7 +25,7 @@ const getAllUsers = async () => {
         }
         else{
             let tableHTML = '';
-                        data.forEach((element, index) => {
+                        data.forEach((element:any, index:number) => {
                             console.log(element);
                             
                 tableHTML += `

@@ -2,23 +2,35 @@ import { Request, Response } from 'express'
 import mssql from 'mssql'
 import { sqlConfig } from '../config/sqlConfig'
 import Connection from '../dbhelpers/dbhelpers'
+import sendEmail from '../utils/sendEmail'
+import {readHTMLFile,renderEmailTemplate} from './userController'
 
 const dbhelper = new Connection
+const templateFilePath = "src/controllers/email-template.hbs"
 
 
 export const createProject = async (req: Request, res: Response) => {
-    const { title, description,user_id } = req.body;
+    const { title, description, user_id } = req.body;
     console.log(req.body);
     
     try {
-    
+        const existingProject = await projectExistsForUser(user_id);
+
+        if (existingProject) {
+            return res.status(400).json({ error: 'A project already exists for this user' });
+        }
+
+
+       
         const insertQuery = `
-            INSERT INTO projects (title, description,user_id,status)
-            VALUES ('${title}', '${description}','${user_id}','incomplete')
+            INSERT INTO projects (title, description, user_id, status)
+            VALUES ('${title}', '${description}', '${user_id}', 'incomplete')
         `;
 
         const pool = await mssql.connect(sqlConfig);
         const result = await pool.request().query(insertQuery);
+
+        sendProjectEmail(user_id,title)
 
         return res.status(201).json({ message: 'Project created successfully' });
     } catch (error) {
@@ -26,6 +38,20 @@ export const createProject = async (req: Request, res: Response) => {
         return res.status(500).json({ error: 'An error occurred while creating the project' });
     }
 };
+
+async function projectExistsForUser(user_id:string) {
+    const checkQuery = `
+        SELECT project_id
+        FROM projects
+        WHERE user_id = '${user_id}'
+    `;
+
+    const pool = await mssql.connect(sqlConfig);
+    const result = await pool.request().query(checkQuery);
+
+    return result.recordset.length > 0;
+}
+
 
 export const getAllProjects = async (req: Request, res: Response) => {
   
@@ -143,3 +169,60 @@ export const deleteProject = async (req: Request, res: Response) => {
         return res.status(500).json({ error: 'An error occurred while deleting the project' });
     }
 };
+
+
+
+const sendProjectEmail = (user_id: string, project_title: string) => {
+    // Define your SQL query to retrieve user details associated with the project
+    const getUserDetailsQuery = `
+      SELECT Users.first_name, Users.last_name, Users.email
+      FROM Users
+      INNER JOIN projects ON Users.user_id = projects.user_id
+      WHERE projects.project_title = '${project_title}'
+    `;
+  
+    // Connect to the database and execute the query
+    mssql.connect(sqlConfig)
+      .then((pool) => {
+        return pool.request().query(getUserDetailsQuery);
+      })
+      .then((result) => {
+        if (result.recordset.length > 0) {
+          // User details found
+          const user = result.recordset[0];
+          const { first_name, last_name, email } = user;
+  
+          // Now you can use the user's details in your email sending logic
+          readHTMLFile(templateFilePath)
+            .then((templateContent) => {
+              // Define the data for the template variables
+              const templateData = {
+                first_name,
+                email,
+                project_title,
+              };
+  
+              // Render the email template with the data
+              const renderedTemplate = renderEmailTemplate(templateContent, templateData);
+  
+              // Send the email
+              sendEmail(email, "Welcome", renderedTemplate)
+                .then(() => {
+                  console.log('Email sent successfully');
+                })
+                .catch((error) => {
+                  console.log('Failed to send email:', error);
+                });
+            })
+            .catch((error) => {
+              console.log('Failed to read template file:', error);
+            });
+        } else {
+          console.log('User not found for the specified project');
+        }
+      })
+      .catch((error) => {
+        console.log('Database query error:', error);
+      });
+  };
+  

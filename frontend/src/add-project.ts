@@ -65,7 +65,7 @@ addform.addEventListener('submit', async (event) => {
     console.log(data);
     
 
-    data.forEach(element => {
+    data.forEach((element:any) => {
         const element_row = `
         <option valu="${element.user_id}">${element.first_name} ${element.last_name}</option>
         `
@@ -75,4 +75,5 @@ addform.addEventListener('submit', async (event) => {
 })
 }
 
-fetchAllU()
+const admin_token =  localStorage.getItem('user-token') as string;
+fetchAllU(admin_token)

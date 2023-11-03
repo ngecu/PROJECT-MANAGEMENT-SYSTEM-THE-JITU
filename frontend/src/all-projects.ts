@@ -26,7 +26,7 @@ const getAllProjects = async () => {
         }
         else{
             let tableHTML = '';
-                        data.forEach((element, index) => {
+                        data.forEach((element:any, index:number) => {
                             console.log(element);
                             
                 tableHTML += `
@@ -43,8 +43,8 @@ const getAllProjects = async () => {
                 `;
             });
             
-            const tableBody = document.querySelector('table tbody');
-            tableBody.innerHTML = tableHTML; // Set the innerHTML of the table body
+            const tableBody = document.querySelector('table tbody') as HTMLElement;
+            tableBody.innerHTML = tableHTML;
             
 
         }
