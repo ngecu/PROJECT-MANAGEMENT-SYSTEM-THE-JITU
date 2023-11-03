@@ -2,13 +2,12 @@ var ctx = document.getElementById('myChart').getContext('2d');
 
 // Static data for the donut chart
 var donutData = {
-  labels: ['Confirmed Cases', 'Recovered Cases', 'Deaths'],
+  labels: ['Complete Projects', 'Incomplete Projects'],
   datasets: [{
-    data: [5000, 3000, 1000], // Replace these values with your static data
+    data: [5000, 3000],
     backgroundColor: [
       'rgba(255, 99, 132, 0.6)',
-      'rgba(54, 162, 235, 0.6)',
-      'rgba(255, 206, 86, 0.6'
+      'rgba(54, 162, 235, 0.6)'
     ],
     hoverOffset: 4
   }]

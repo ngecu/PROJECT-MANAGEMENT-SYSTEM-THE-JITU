@@ -36,8 +36,8 @@ const getAllProjects = async () => {
                         <td>${element.status}</td>
                         <td>${element.user_id}</td>
                         <td>
-                            <button onclick="editProject(${index})">Edit</button>
-                            <button onclick="deleteProject(${index})">Delete</button>
+                            <button class="edit-button" onclick="editProject(${index})">Edit</button>
+                            <button class="delete-button" onclick="deleteProject(${index})">Delete</button>
                         </td>
                     </tr>
                 `;
