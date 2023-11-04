@@ -1,5 +1,7 @@
 const all_user = document.querySelector('.all-user') as HTMLDivElement;
-const all_tbody = document.querySelector('.user-tbody') as HTMLDivElement;
+const all_pbody = document.querySelector('.project-tbody') as HTMLDivElement;
+const all_ubody = document.querySelector('.user-tbody') as HTMLDivElement;
+
 const all_projects_count = document.querySelector('.all-projects-count') as HTMLDivElement;
 
 
@@ -40,7 +42,7 @@ const fetchAllUsers = (user_token: string) => {
                     <td>${element.email}</td>
                 </tr>
             `;
-            all_tbody.innerHTML += element_row;
+            all_ubody.innerHTML += element_row;
         });
 
         console.log(filteredUsers);
@@ -78,16 +80,16 @@ const fetchAllProjects = (user_token: string) => {
                 <td>1</td>
                 <td>Project A</td>
                 <td><span class="badge badge-success">${element.status}</span></td>
-                <td>User 1</td>
+                <td>${element.first_name} ${element.last_name}</td>
 
                 <td>
-                    <a href="project_edit.html?project=${element.project_id}" class="edit-button btn">Edit</a>
-                    <a href="project.html?project=${element.project_id}" class="view-button btn">View</button>
+                    <a href="edit-project.html?project=${element.project_id}" class="edit-button btn">Edit</a>
+                    <a href="project.html?project=${element.project_id}" class="view-button btn">View</a>
                     <button class="delete-button btn">Delete</button>
                 </td>
                 </tr>
                 `;
-                all_tbody.innerHTML += element_row;
+                all_pbody.innerHTML += element_row;
             });
             console.log(data);
         } else {

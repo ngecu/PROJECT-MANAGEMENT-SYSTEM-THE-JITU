@@ -57,7 +57,10 @@ export const getAllProjects = async (req: Request, res: Response) => {
   
     
     try {
-        const query = 'SELECT * FROM projects'; 
+        const query = `SELECT projects.project_id, projects.title, projects.description, projects.user_id, projects.status, projects.created_at, projects.modified_at,
+        Users.first_name, Users.last_name, Users.email, Users.role
+ FROM projects
+ INNER JOIN Users ON projects.user_id = Users.user_id;`; 
         const pool = await mssql.connect(sqlConfig);
         const result = await pool.request().query(query);
 

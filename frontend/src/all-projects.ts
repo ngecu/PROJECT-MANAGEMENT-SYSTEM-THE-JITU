@@ -34,10 +34,10 @@ const getAllProjects = async () => {
                         <td>${index + 1}</td>
                         <td>${element.title}</td> <!-- Replace 'projectName' with the actual property name in your data -->
                         <td>${element.status}</td>
-                        <td>${element.user_id}</td>
+                        <td>${element.first_name} ${element.last_name}</td>
                         <td>
-                            <button class="edit-button" onclick="editProject(${index})">Edit</button>
-                            <button class="delete-button" onclick="deleteProject(${index})">Delete</button>
+                            <a href="project.html?project=${element.project_id}" class="edit-button" >Edit</a>
+                            <button class="delete-button">Delete</button>
                         </td>
                     </tr>
                 `;
