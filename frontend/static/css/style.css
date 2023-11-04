@@ -306,6 +306,16 @@ body {
   cursor: pointer;
 }
 
+table a {
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin: 2px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .view-button {
   background-color: #007BFF;
 }
@@ -332,4 +342,15 @@ table th, table td {
 .no-data-row {
   background-color: #dc3545;
   color: white;
+}
+
+.dashboard-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px;
+  display: flex;
+  gap: 10px;
 }/*# sourceMappingURL=style.css.map */

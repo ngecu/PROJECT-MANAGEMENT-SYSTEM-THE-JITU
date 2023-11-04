@@ -48,32 +48,35 @@ addform.addEventListener('submit', async (event) => {
 
 
 
- const fetchAllU = (user_token:string)=>{
-    console.log("fethching all users");
-    
-    fetch('http://localhost:5000/user/allUsers',{
-    headers:{
-        'Accept': 'application/json',
-        'Content-type': 'application/json',
-        'token':user_token
-    },
-    method: "GET",
-  
-}).then(res => res.json()
-).then(data=>{
-    const x = document.querySelector('#user') as HTMLSelectElement;
-    console.log(data);
-    
+const fetchAllU = (user_token: string) => {
+    console.log("fetching all users");
 
-    data.forEach((element:any) => {
-        const element_row = `
-        <option valu="${element.user_id}">${element.first_name} ${element.last_name}</option>
-        `
-        x.innerHTML += element_row
+    fetch('http://localhost:5000/user/allUsers', {
+        headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json',
+            'token': user_token
+        },
+        method: "GET",
+    })
+    .then(res => res.json())
+    .then(data => {
+        const x = document.querySelector('#user') as HTMLSelectElement;
+        console.log(data);
+
+        data
+            .filter((element:any) => element.role !== 'admin') // Exclude users with role 'admin'
+            .forEach((element: any) => {
+                const option = document.createElement('option');
+                option.value = element.user_id;
+                option.textContent = `${element.first_name} ${element.last_name}`;
+                x.appendChild(option);
+            });
+
+        console.log(data);
     });
-    console.log(data);
-})
 }
+
 
 const admin_token =  localStorage.getItem('user-token') as string;
 fetchAllU(admin_token)

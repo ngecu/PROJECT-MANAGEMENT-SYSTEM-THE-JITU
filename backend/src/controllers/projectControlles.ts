@@ -62,9 +62,7 @@ export const getAllProjects = async (req: Request, res: Response) => {
         const result = await pool.request().query(query);
 
         const projects = result.recordset;
-        if (projects.length == 0) {
-            return res.status(200).json({projects:"No Projects"});
-        }
+    
 
         return res.status(200).json(projects);
     } catch (error) {

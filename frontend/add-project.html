@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/index.css"></head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="static/css/index.css">
     <link rel="stylesheet" href="static/css/style.css">
     <link rel="stylesheet" href="static/css/add-project.css">
 
     
 
-    <title>Document</title>
+    <title>Project Management System</title>
 </head>
 <body>
     
@@ -91,7 +90,7 @@
         </div>
 
 
-        <main>
+        <div class="main">
 
             <div class="top-menu">
                 <div class="dashboard-card">
@@ -99,35 +98,33 @@
                 </div>
             </div>
     
-            <div class="add-project">
-                <h2> Project Add</h2>
-                <div class="add-project-container">
-                    <div class="top-part">
-                        <h3>Project</h3>
-                        <p>-</p>
-    
+            <div class="dashboard-card">
+                <div class="custom-add-project">
+                    <div class="custom-add-project-container">
+                        <form class="add-project-form">
+                            <div class="custom-form-group">
+                                <label for="pname">Project Name</label>
+                                <input type="text" id="pname" name="pname" class="custom-input" placeholder="Enter project name">
+                            </div>
+                            <div class="custom-form-group">
+                                <label for="user">User</label>
+                                <select name="user" id="user" class="custom-select">
+                                    <option>Select User</option>
+                                </select>
+                            </div>
+                            <div class="custom-form-group">
+                                <label for="pdescr">Project Description</label>
+                                <input type="text" id="pdescr" name="pdescr" class="custom-input" placeholder="Enter project description">
+                            </div>
+                            <div class="custom-buttons">
+                                <button class="custom-button" type="submit">Submit Project</button>
+                            </div>
+                        </form>
                     </div>
-    
-                    <form class="add-project-form">
-                        <label for="fname">Project Name</label><br>
-                        <input type="text" id="pname" name="pname" value=""><br><br>
-                        <label for="lname">User</label><br>
-                        <select name="user" id="user">
-                          
-                        </select>
-                        <label for="fname">Project Description</label><br>
-                        <input type="text" id="pdescr" name="pdescr" value=""><br><br>
-                        
-                        <div class="buttons">
-                            <button class="button button1" type="submit">Submit Project</button><br><br>
-                          
-                        </div>
-                        
-                    </form> 
-                    
                 </div>
             </div>
-        </main>
+           
+        </div>
     </div>
    
     <script src="./dist/add-project.js"></script>

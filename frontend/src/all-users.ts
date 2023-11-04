@@ -37,8 +37,8 @@ const getAllUsers = async () => {
                         <td>${element.role}</td>
 
                         <td>
-                            <button class="edit-button" onclick="editProject(${index})">Edit</button>
-                            <button class="delete-button" onclick="deleteProject(${index})">Delete</button>
+                            <a href="user_view.html?user=${element.user_id}"class="edit-button" >View</a>
+                            <button class="delete-button" onclick="deleteUser(${element.user_id})">Delete</button>
                         </td>
                     </tr>
                 `;
@@ -58,6 +58,39 @@ all_tbody4.innerHTML = tableHTML; // Set the innerHTML of the table body
         // Handle the error as needed
     }
 };
+function deleteUser(user_id: string) {
+    const token = localStorage.getItem('token') as string;
+console.log("khjk");
+
+    // Show a confirmation dialog
+    const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+
+    if (!confirmDelete) {
+        return; // User canceled the deletion
+    }
+
+    fetch(`http://localhost:5000/user/${user_id}`, {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json',
+            'token': token // Include the user token if needed
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            location.href = "all-users.html";
+        } else {
+            alert("Failed to delete the user");
+            console.error('Failed to delete the user');
+        }
+    })
+    .catch(error => {
+        console.error('An error occurred while deleting the user:', error);
+    });
+}
+
+
 
 
 getAllUsers()

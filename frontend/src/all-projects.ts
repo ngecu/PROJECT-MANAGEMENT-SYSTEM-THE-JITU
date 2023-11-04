@@ -20,7 +20,7 @@ const getAllProjects = async () => {
     `
 
 
-        if (data.projects == "No Projects") {
+        if (data.length == 0) {
             all_tbody2.innerHTML = "";
             all_tbody2.innerHTML = no_data_tr;
         }
