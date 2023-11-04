@@ -75,9 +75,11 @@ export const getAllProjects = async (req: Request, res: Response) => {
 };
 
 export const getProject = async (req: Request, res: Response) => {
-    const project_id = req.params.project_id;
+   
 
     try {
+        // res.header('Cache-Control', 'no-store');
+         const project_id = req.params.project_id;
         const query = `SELECT * FROM projects WHERE project_id = '${project_id}'`; // Adjust the query according to your database schema
 
         const pool = await mssql.connect(sqlConfig);

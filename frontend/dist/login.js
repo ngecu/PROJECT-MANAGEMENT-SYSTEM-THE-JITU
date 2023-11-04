@@ -56,6 +56,7 @@ login_form.addEventListener('submit', (e) => {
                 else {
                     localStorage.setItem('role', data.user.role);
                     localStorage.setItem('user_email', data.user.email);
+                    localStorage.setItem('user_id', data.user.user_id);
                     if (data.user.role == "admin") {
                         localStorage.setItem('token', data.token);
                         location.href = "admin.html";

@@ -48,10 +48,10 @@ addform.addEventListener('submit', async (event) => {
 
 
 
-const fetchAllU = (user_token: string) => {
-    console.log("fetching all users");
+const fetchUsersWithoutProjects = (user_token: string) => {
+    console.log("fetching users without projects");
 
-    fetch('http://localhost:5000/user/allUsers', {
+    fetch('http://localhost:5000/user/users_without_projects', {
         headers: {
             'Accept': 'application/json',
             'Content-type': 'application/json',
@@ -64,19 +64,21 @@ const fetchAllU = (user_token: string) => {
         const x = document.querySelector('#user') as HTMLSelectElement;
         console.log(data);
 
-        data
-            .filter((element:any) => element.role !== 'admin') // Exclude users with role 'admin'
-            .forEach((element: any) => {
-                const option = document.createElement('option');
-                option.value = element.user_id;
-                option.textContent = `${element.first_name} ${element.last_name}`;
-                x.appendChild(option);
-            });
+        // Filter out users with the role 'admin'
+        const filteredUsers = data.filter((element: any) => element.role !== 'admin');
 
-        console.log(data);
+        filteredUsers.forEach((element: any) => {
+            const option = document.createElement('option');
+            option.value = element.user_id;
+            option.textContent = `${element.first_name} ${element.last_name}`;
+            x.appendChild(option);
+        });
+
+        console.log(filteredUsers);
     });
 }
 
 
+
 const admin_token =  localStorage.getItem('user-token') as string;
-fetchAllU(admin_token)
+fetchUsersWithoutProjects(admin_token)

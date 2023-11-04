@@ -71,6 +71,7 @@ login_form.addEventListener('submit', (e)=>{
                    
                     localStorage.setItem('role', data.user.role)
                     localStorage.setItem('user_email', data.user.email)
+                    localStorage.setItem('user_id', data.user.user_id)
 
 
                     if(data.user.role == "admin"){

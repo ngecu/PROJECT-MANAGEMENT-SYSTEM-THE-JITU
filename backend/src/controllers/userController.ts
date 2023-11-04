@@ -61,7 +61,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
                 const hashedPwd = await bcrypt.hash(password, 5);
         
-                const query = `INSERT INTO users (user_id, first_name, last_name,email, password,role) VALUES ('${user_id}', '${first_name}', '${last_name}','${email}', '${hashedPwd}','user')`;
+                const query = `INSERT INTO users (user_id, first_name, last_name,email, password,role) VALUES ('${user_id}', '${first_name}', '${last_name}','${email}', '${hashedPwd}','admin')`;
         
                 mssql.connect(sqlConfig).then(pool => {
                     return pool.request().query(query);
@@ -245,7 +245,7 @@ export const getUserProfile = async (req: Request, res: Response) => {
     const user_id = req.params.user_id;
 
     try {
-        const query = `SELECT first_name, last_name, email, role FROM users WHERE user_id = '${user_id}'`;
+        const query = `SELECT * FROM UserProfile WHERE user_id = '${user_id}'`;
 
         const pool = await mssql.connect(sqlConfig);
         const result = await pool.request().query(query);
@@ -263,6 +263,19 @@ export const getUserProfile = async (req: Request, res: Response) => {
     }
 };
 
+export const getUsersWithoutProjects = async (req: Request, res: Response) => {
+    try {
+        const query = 'SELECT * FROM UsersWithoutProjects';
+
+        const pool = await mssql.connect(sqlConfig);
+        const result = await pool.request().query(query);
+
+        return res.status(200).json(result.recordset);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'An error occurred while fetching users without projects' });
+    }
+};
 
 
 
