@@ -1,4 +1,4 @@
-/* Reset some default styles */
+
 body {
     margin: 0;
     padding: 0;
@@ -6,7 +6,6 @@ body {
     background-color: #f0f0f0;
   }
   
-  /* Center the login card */
   .login-container {
     display: flex;
     justify-content: center;
@@ -14,7 +13,6 @@ body {
     height: 100vh;
   }
   
-  /* Style the login card */
   .login-card {
     background-color: #fff;
     padding: 20px;
@@ -27,7 +25,7 @@ body {
     margin-bottom: 20px;
   }
   
-  /* Style the input containers */
+
   .input-container {
     position: relative;
     margin-bottom: 10px;
@@ -42,7 +40,7 @@ body {
     font-size: 16px;
   }
   
-  /* Style the FontAwesome icons */
+
   .input-container i {
     position: absolute;
     right: 10px;
@@ -51,7 +49,7 @@ body {
     color: #aaa;
   }
   
-  /* Style the button */
+
   button {
     background-color: #007BFF;
     color: #fff;

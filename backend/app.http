@@ -1,8 +1,11 @@
-POST http://localhost:5200/project/createProject
+POST http://localhost:5000/project/addProject
 Content-Type: application/json
 
 {
+   "project_id": "1",
+   "project_name":"Kiatu",
+   "project_description":"Sema kesho ni mwongo",
+   "project_status":"Incomplete",
+   "dueDate":"20/11/2023"
 
-   "id":"sdasdasad",
-   "saddsadad":"kinuthia"
 }
