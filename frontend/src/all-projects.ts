@@ -1,4 +1,27 @@
-const all_tbody2 = document.querySelector('tbody') as HTMLDivElement;
+async function deleteProject(projectId:number) {
+    const confirmDelete = confirm('Are you sure you want to delete this project?');
+
+    if (confirmDelete) {
+        try {
+            const response = await fetch(`http://localhost:5000/project/${projectId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                alert('Project deleted successfully');
+                // Optionally, you can update the project list here if needed.
+            } else {
+                alert('Failed to delete project');
+            }
+        } catch (error) {
+            console.error('An error occurred while deleting the project:', error);
+        }
+    }
+}
 
 const getAllProjects = async () => {
     try {
@@ -12,86 +35,49 @@ const getAllProjects = async () => {
 
         const data = await response.json();
         // console.log(data);
-
+        const all_tbody2 = document.querySelector('.all_tbody2') as HTMLTableElement;
 
         const no_data_tr = `<tr class="no-data-row">
         <td colspan="5">No Projects</td>
     </tr>
     `
 
-
         if (data.length == 0) {
             all_tbody2.innerHTML = "";
             all_tbody2.innerHTML = no_data_tr;
-        }
-        else{
+        } else {
             let tableHTML = '';
-                        data.forEach((element:any, index:number) => {
-                            console.log(element);
-                            
+            data.forEach((element:any, index:number) => {
                 tableHTML += `
                     <tr>
                         <td>${index + 1}</td>
-                        <td>${element.title}</td> <!-- Replace 'projectName' with the actual property name in your data -->
+                        <td>${element.title}</td>
                         <td>${element.status}</td>
                         <td>${element.first_name} ${element.last_name}</td>
                         <td>
-                            <a href="project.html?project=${element.project_id}" class="edit-button" >Edit</a>
-                            <button class="delete-button" >Delete</button>
+                            <a href="project.html?project=${element.project_id}" class="edit-button">Edit</a>
+                            <button class="delete-button">Delete</button>
                         </td>
                     </tr>
                 `;
             });
-            
+
             const tableBody = document.querySelector('table tbody') as HTMLElement;
             tableBody.innerHTML = tableHTML;
-            
 
+            // Add event listeners to delete buttons
+            const deleteButtons = document.querySelectorAll('.delete-button');
+            deleteButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    const projectId = data[index].project_id;
+                    deleteProject(projectId);
+                });
+            });
         }
-
-     
     } catch (error) {
         console.error(error);
-        // Handle the error as needed
+       
     }
 };
 
-
-getAllProjects()
-
-const deleteProject = (projectId: number) => {
-    // Confirm the deletion with the user
-    if (confirm('Are you sure you want to delete this project?')) {
-        // Make an HTTP DELETE request to the server to delete the project
-        fetch(`http://localhost:5000/projects/${projectId}`, {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-type': 'application/json',
-                // Add any necessary headers, such as authentication token
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                // Handle successful deletion
-                console.log(`Project with ID ${projectId} deleted successfully.`);
-                // You may want to refresh the page or update the UI
-            } else {
-                // Handle deletion failure
-                console.error('Failed to delete the project.');
-            }
-        })
-        .catch(error => {
-            // Handle errors
-            console.error('An error occurred while deleting the project:', error);
-        });
-    }
-};
-
-
-const btns = document.querySelectorAll('.delete-button');
-btns.forEach((element:any,index:number) => {
-    console.log(element);
-    
-    element.addEventListener("click",()=>deleteProject(index))
-});
+getAllProjects();
