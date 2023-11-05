@@ -5,39 +5,72 @@ import Connection from '../dbhelpers/dbhelpers'
 import sendEmail from '../utils/sendEmail'
 import {readHTMLFile,renderEmailTemplate} from './userController'
 
+import nodemailer from 'nodemailer';
+
 const dbhelper = new Connection
 const templateFilePath = "src/controllers/email-template.hbs"
 
 
-export const createProject = async (req: Request, res: Response) => {
-    const { title, description, user_id } = req.body;
-    console.log(req.body);
-    
-    try {
-        const existingProject = await projectExistsForUser(user_id);
 
-        if (existingProject) {
-            return res.status(400).json({ error: 'A project already exists for this user' });
-        }
+// Create a nodemailer transporter using your email service (e.g., Gmail)
+const transporter = nodemailer.createTransport({
+  service: 'Gmail', // You can change this to your email service
+  auth: {
+    user: 'your_email@gmail.com', // Your email address
+    pass: 'your_email_password', // Your email password
+  },
+});
 
+export const createProject = async (req, res) => {
+  const { title, description, user_id } = req.body;
 
-       
-        const insertQuery = `
-            INSERT INTO projects (title, description, user_id, status)
-            VALUES ('${title}', '${description}', '${user_id}', 'incomplete')
-        `;
+  try {
+    const existingProject = await projectExistsForUser(user_id);
 
-        const pool = await mssql.connect(sqlConfig);
-        const result = await pool.request().query(insertQuery);
-
-        sendProjectEmail(user_id,title)
-
-        return res.status(201).json({ message: 'Project created successfully' });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'An error occurred while creating the project' });
+    if (existingProject) {
+      return res.status(400).json({ error: 'A project already exists for this user' });
     }
+
+    const insertQuery = `
+      INSERT INTO projects (title, description, user_id, status)
+      VALUES ('${title}', '${description}', '${user_id}', 'incomplete')
+    `;
+
+    const pool = await mssql.connect(sqlConfig);
+    const result = await pool.request().query(insertQuery);
+
+    // Fetch the user's email
+    const getUserEmailQuery = `SELECT email FROM users WHERE user_id = '${user_id}'`;
+    const emailResult = await pool.request().query(getUserEmailQuery);
+
+    if (emailResult.recordset.length > 0) {
+      const userEmail = emailResult.recordset[0].email;
+
+      // Send an email to the user
+      const mailOptions = {
+        from: 'your_email@gmail.com',
+        to: userEmail,
+        subject: 'Project Created',
+        text: `Your project "${title}" has been created successfully.`,
+      };
+
+      transporter.sendMail(mailOptions, (error:any, info:any) => {
+        if (error) {
+          console.error('Error sending email:', error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+    }
+
+    return res.status(201).json({ message: 'Project created successfully' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'An error occurred while creating the project' });
+  }
 };
+
+
 
 async function projectExistsForUser(user_id:string) {
     const checkQuery = `
