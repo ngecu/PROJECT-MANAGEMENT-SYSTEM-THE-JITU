@@ -18,6 +18,10 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   text-align: center;
+  width: 35%;
+}
+.login-card h3 {
+  font-size: 27px;
 }
 
 h2 {
@@ -29,6 +33,7 @@ h2 {
   margin-bottom: 10px;
   border: 1px solid #CED4DA;
   background: #FFF;
+  height: 50px;
 }
 
 input {
@@ -36,6 +41,8 @@ input {
   border: 0;
   border-radius: 4px;
   font-size: 16px;
+  width: 88%;
+  height: 52%;
 }
 input:focus {
   border: none;
@@ -79,7 +86,8 @@ small {
 .remember_login_container div {
   display: flex;
   align-items: center;
-  width: 50%;
+  width: 100%;
+  margin: 2% 0;
 }
 .remember_login_container div button {
   width: 100%;
@@ -88,4 +96,5 @@ small {
   color: #007BFF;
   text-decoration: none;
   font-size: 0.9 rem;
+  width: 100%;
 }/*# sourceMappingURL=login.css.map */

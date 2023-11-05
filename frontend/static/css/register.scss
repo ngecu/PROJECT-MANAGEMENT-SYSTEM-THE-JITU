@@ -19,6 +19,7 @@ body {
     text-align: center;
     width: 300px;
     padding: 20px;
+    width: 35%;
   }
   
 //   .logo img {
@@ -42,20 +43,20 @@ body {
     position: relative;
     margin-bottom: 10px;
     border: 1px solid #CED4DA; background: #FFF; 
-
+    height: 50px;
   }
   
   input {
     // width: 100%;
     padding: 10px;
-    border: none;
-    // border: 1px solid #ccc;
+    border: 0;
+    border-radius: 4px;
     font-size: 16px;
-
+    width: 88%;
+    height: 52%;
     &:focus{
       border: none;
     }
-    
   }
   
   .input-container i {
