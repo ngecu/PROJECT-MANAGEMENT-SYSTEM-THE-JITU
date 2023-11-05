@@ -4,6 +4,7 @@ import { welcomeUser } from './mailservices/welcomeUser'
 
 
 const app = express()
+const PORT = 4001;
 
 const run = async()=>{
     cron.schedule('*/10 * * * * *', async()=>{
@@ -17,6 +18,6 @@ const run = async()=>{
 run()
 
 
-app.listen(4401, ()=>{
+app.listen(PORT, ()=>{
     console.log('Mail server up and running ...'); 
 })

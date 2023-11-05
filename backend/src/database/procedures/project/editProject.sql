@@ -1,5 +1,10 @@
--- -- SQL Stored Procedure to Edit a Project
-CREATE PROCEDURE editProject
+
+-- USE Project_DB;
+
+
+
+
+CREATE OR ALTER PROCEDURE editProject
   @projectID VARCHAR(200),
   @project_name VARCHAR(250),
   @project_description VARCHAR(250),
@@ -17,3 +22,8 @@ BEGIN
     project_status = @project_status
   WHERE project_id = @projectID;
 END;
+
+
+
+
+

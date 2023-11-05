@@ -14,7 +14,7 @@ app.use(json())
 
 app.use('/project', project_router);
 app.use('/user', user_router)
-const PORT = 5000;
+const PORT = 6000;
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT} `);
