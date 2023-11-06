@@ -53,13 +53,15 @@ Content-Type: application/json
    "first_name":"bill",
    "last_name":"Mario",
    "email":"kioko98@gmail.com",
-   "password": "123456789"
+   "password": "123456789",
+   "role": "user"
 }
 
 
 
-###
-GET http://localhost:6000/user/login
+###rs
+
+GET http://localhost:6000/user/all
 Content-Type: application/json
 
 {

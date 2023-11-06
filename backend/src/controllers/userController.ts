@@ -79,7 +79,7 @@ const dbhelper = new Connection
 
 export const registerUser = async(req:Request, res: Response) =>{
     try {
-        const { first_name, last_name,email, password } = req.body;
+        const { first_name, last_name,email, role, password } = req.body;
 
         let user_id = v4()
 
@@ -87,7 +87,7 @@ export const registerUser = async(req:Request, res: Response) =>{
 
     
         let result = dbhelper.execute('registerUser', {
-            user_id, first_name, last_name, email, password: hashedPwd
+            user_id, first_name, last_name, email, role, password: hashedPwd
         })
         
 
