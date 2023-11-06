@@ -1,4 +1,7 @@
--- -- CREATE DATABASE Project_DB;
+-- CREATE DATABASE Project_DB;
+
+-- USE Project_DB;
+
 
 CREATE OR ALTER PROCEDURE registerUser(
     @user_id VARCHAR(100),

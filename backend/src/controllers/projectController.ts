@@ -55,7 +55,7 @@ export const getAllProjects = async(req:Request, res:Response)=>{
 }
 
 
-export const getNoteById = async (req: Request, res: Response) => {
+export const getProjectById = async (req: Request, res: Response) => {
     try {
         const project_id = req.params.project_id;
 

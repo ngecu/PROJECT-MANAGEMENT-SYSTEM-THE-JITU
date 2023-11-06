@@ -30,3 +30,47 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:6000/project/deleteProject/ba892a87-0093-4844-8b05-164c2c824315
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 
+##User 
+
+POST http://localhost:6000/user/register
+Content-Type: application/json
+
+{
+   "first_name":"bill",
+   "last_name":"Mario",
+   "email":"kioko98@gmail.com",
+   "password": "123456789"
+}
+
+
+
+###
+GET http://localhost:6000/user/login
+Content-Type: application/json
+
+{
+   "email":"kioko98@gmail.com",
+   "password": "123456789"
+}
+
+
+
+###
+
+GET http://localhost:6000/user/all
+
+
