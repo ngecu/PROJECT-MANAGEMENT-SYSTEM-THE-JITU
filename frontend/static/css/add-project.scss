@@ -1,0 +1,47 @@
+
+.custom-add-project-container {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-form-group {
+    margin-bottom: 20px;
+}
+
+.custom-form-group label {
+    font-weight: bold;
+}
+
+.custom-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.custom-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.custom-buttons {
+    text-align: center;
+}
+
+.custom-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.custom-button:hover {
+    background-color: #0056b3;
+}
