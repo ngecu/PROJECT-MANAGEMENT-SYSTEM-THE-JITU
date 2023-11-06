@@ -69,7 +69,7 @@ const fetchAllProjects = (user_token: string) => {
     .then(data => {
         console.log(data);
         
-        if (Array.isArray(data)) {
+        if (Array.isArray(data.projects)) {
             all_projects_count.innerHTML = `${data.length}`;
 
             data.forEach((element: any) => {
