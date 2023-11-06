@@ -21,11 +21,9 @@ async function viewUserDetails(userId: string) {
 // Parse the user ID from the URL (replace '123' with the actual user ID)
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-const userId = urlParams.get('user_id');
+const userId = urlParams.get('user_id') as string;
 
-if (!userId) {
-    alert('User ID not found');
-} else {
+
     // Call the function to populate user details
     viewUserDetails(userId);
-}
+

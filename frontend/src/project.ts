@@ -19,20 +19,21 @@ const fetchAndDisplayProjectDetails = (projectId: number) => {
     })
     .then(res => res.json())
     .then(data => {
+        console.log(data)
         const projectDetails = data; // Replace with the actual data structure
 
         // Populate project details in the HTML structure
-        const projectNameElement = document.getElementById('project-name');
-        const statusElement = document.getElementById('status');
-        const descriptionElement = document.getElementById('description');
-        const contentElement = document.getElementById('content');
+        const projectNameElement = document.getElementById('project-name') as HTMLElement ;
+        const statusElement = document.getElementById('status') as HTMLElement ;
+        const descriptionElement = document.getElementById('description') as HTMLElement;
+        const contentElement = document.getElementById('content')  as HTMLElement;
 
-        if (projectNameElement && statusElement && descriptionElement && contentElement) {
-            projectNameElement.textContent = projectDetails.title;
-            statusElement.textContent = projectDetails.status;
-            descriptionElement.textContent = projectDetails.description;
-            contentElement.textContent = projectDetails.content;
-        }
+      
+            projectNameElement.innerHTML = projectDetails.title;
+            statusElement.innerHTML = projectDetails.status;
+            descriptionElement.innerHTML = projectDetails.description;
+            contentElement.innerHTML = projectDetails.content;
+        
     })
     .catch(error => {
         console.error('An error occurred while fetching project details:', error);

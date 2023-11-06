@@ -51,7 +51,7 @@ addform.addEventListener('submit', async (event) => {
 const fetchUsersWithoutProjects = (user_token: string) => {
     console.log("fetching users without projects");
 
-    fetch('http://localhost:5000/user/users_without_projects', {
+    fetch('http://localhost:5000/user/allUsers', {
         headers: {
             'Accept': 'application/json',
             'Content-type': 'application/json',

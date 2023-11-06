@@ -61,7 +61,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
                 const hashedPwd = await bcrypt.hash(password, 5);
         
-                const query = `INSERT INTO users (user_id, first_name, last_name,email, password,role) VALUES ('${user_id}', '${first_name}', '${last_name}','${email}', '${hashedPwd}','admin')`;
+                const query = `INSERT INTO users (user_id, first_name, last_name,email, password,role) VALUES ('${user_id}', '${first_name}', '${last_name}','${email}', '${hashedPwd}','user')`;
         
                 mssql.connect(sqlConfig).then(pool => {
                     return pool.request().query(query);
@@ -241,27 +241,28 @@ export const deleteUser = async (req: Request, res: Response) => {
 };
 
 
-export const getUserProfile = async (req: Request, res: Response) => {
-    const user_id = req.params.user_id;
 
+//get user profile 
+export const getUserProfile = async(req:Request, res:Response)=>{
     try {
-        const query = `SELECT * FROM UserProfile WHERE user_id = '${user_id}'`;
 
-        const pool = await mssql.connect(sqlConfig);
-        const result = await pool.request().query(query);
+        const userID = req.params.userID;
 
-        if (result.recordset.length === 0) {
-            return res.status(404).json({ error: 'User not found' });
-        }
+        let user = dbhelper.execute('fetchUserProfile', {
+                        userID
+        })
 
-        const userProfile = result.recordset[0];
-
-        return res.status(200).json(userProfile);
+        return res.status(200).json({
+            user
+        })
+        
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'An error occurred while fetching the user profile' });
+        return res.json({
+            error: error
+        })
     }
-};
+}
+
 
 export const getUsersWithoutProjects = async (req: Request, res: Response) => {
     try {

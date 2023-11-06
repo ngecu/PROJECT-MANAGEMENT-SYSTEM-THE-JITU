@@ -67,10 +67,11 @@ const fetchAllProjects = (user_token: string) => {
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data);
+        console.log(data.projects);
+        all_projects_count.innerHTML = `${data.projects.length}`;
         
-        if (Array.isArray(data.projects)) {
-            all_projects_count.innerHTML = `${data.length}`;
+        if (Array.isArray(data)) {
+            console.log("data is ",data)
 
             data.forEach((element: any) => {
                 console.log(typeof(element));
