@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/index.css"></head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" href="static/css/add-project.css">
+    <link rel="stylesheet" href="static/css/allProjects.css">
+    <link rel="stylesheet" href="static/css/style.css">
+
+
+
+    <title>Project Management System</title>
+</head>
+<body>
+    
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="static/images/logo.svg" alt="">
+            </div>
+
+            <hr>
+
+            <div class="profile-container">
+                <div class="profile-image-container">
+                    <img src="static/images/profile.png" alt="">
+                </div>
+                <div class="user-name-container">
+                    <p class="username">Full Username</p>
+                </div>
+            </div>
+            
+
+            <hr>
+
+          
+                <a href="admin.html" class="active">
+                  
+                    <i class="fa-solid fa-gauge"></i>
+                   Dashboard
+                
+                </a>
+
+
+
+            <div class="menu">
+                <h2>PROJECTS</h2>
+                <ul>
+                    <li><a href="all-projects.html">
+                        <i class="fa-solid fa-border-all"></i>
+                        All Projects</a></li>
+                    <li>
+                        <a href="add-project.html">
+                            <i class="fa-solid fa-plus"></i>
+                        Add Project
+                    </a>
+                </li>
+                   
+                </ul>
+        
+                <h2>USERS</h2>
+                <ul>
+                    <li><a href="all-users.html">
+                        <i class="fa-solid fa-users"></i>
+                        All Users</a>
+                    </li>
+                 
+                    
+                </ul>
+
+                <button class="logout-btn">
+                   LOGOUT
+                </button>
+
+            </div>
+
+
+           
+        </div>
+
+
+        <main>
+
+            <div class="top-menu">
+                <div class="dashboard-card">
+                    <i class="fa-solid fa-bars"></i> Home
+                </div>
+            </div>
+    
+            <div class="third-bar">
+                <div class="dashboard-card table-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>FIRST NAME</th>
+                                <th>LAST NAME</th>
+                                <th>EMAIL</th>
+                                <th>ROLE</th>
+                                <th>Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                          
+                           
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </main>
+    </div>
+
+    
+    <script src="./dist/all-users.js"></script>
+</body>
+</html>
